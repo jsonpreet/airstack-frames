@@ -1,34 +1,31 @@
 /* eslint-disable react/jsx-key */
-/** @jsxImportSource @airstack/frog/jsx */
-import { Button, Frog } from "@airstack/frog";
-import { handle } from "@airstack/frog/next";
-import { devtools } from "@airstack/frog/dev";
-import { serveStatic } from "@airstack/frog/serve-static";
+/** @jsxImportSource frog/jsx */
+import { Button, Frog } from 'frog'
+import { handle } from 'frog/next'
+import { devtools } from 'frog/dev'
+import { serveStatic } from 'frog/serve-static'
+import { neynar } from 'frog/middlewares'
 
-const app = new Frog({
-  apiKey: process.env.AIRSTACK_API_KEY as string,
-  basePath: "/api",
-});
+const neynarMiddleware = neynar({
+	apiKey: 'NEYNAR_FROG_FM',
+	features: ['interactor', 'cast'],
+})
 
-app.frame("/", (c) => {
-  const { buttonValue, status } = c;
-  return c.res({
-    image: (
-      <div style={{ color: "white", display: "flex", fontSize: 60 }}>
-        {status === "initial"
-          ? "Select your fruit!"
-          : `Selected: ${buttonValue}`}
-      </div>
-    ),
-    intents: [
-      <Button value="apple">Apple</Button>,
-      <Button value="banana">Banana</Button>,
-      <Button value="mango">Mango</Button>,
-    ],
-  });
-});
+const app = new Frog({ title: 'The Professional Fry Slayer Test 🍟', basePath: '/api', browserLocation: '/:path' })
 
-devtools(app, { serveStatic });
+app.frame('/', neynarMiddleware, (c) => {
+	const { buttonValue, status } = c
+	return c.res({
+		image: (
+			<div style={{ color: 'white', display: 'flex', fontSize: 60 }}>
+				{status === 'initial' ? `Welcome ${c.var.interactor?.displayName} to the Professional Fry Slayer Test 🍟` : `Selected: ${buttonValue}`}
+			</div>
+		),
+		intents: [<Button value="follow">Follow</Button>, <Button value="recast">Recast</Button>, <Button value="like">Like</Button>],
+	})
+})
 
-export const GET = handle(app);
-export const POST = handle(app);
+devtools(app, { serveStatic })
+
+export const GET = handle(app)
+export const POST = handle(app)
