@@ -6,12 +6,12 @@ import { devtools } from '@airstack/frog/dev'
 import { serveStatic } from '@airstack/frog/serve-static'
 
 // const neynarMiddleware = neynar({
-// 	apiKey: '7C80F3B5-0FE2-4DAC-B21C-BC6A8684FC3D',
+// 	apiKey: process.env.NEXT_PUBLIC_NEYNAR_FROG_FM,
 // 	features: ['interactor', 'cast'],
 // })
 
 // Instantiate new Frog instance with Airstack API key
-export const app = new Frog({
+const app = new Frog({
 	apiKey: process.env.NEXT_PUBLIC_AIRSTACK_API_KEY,
 	title: 'The Professional Fry Slayer Test 🍟',
 	basePath: '/api',

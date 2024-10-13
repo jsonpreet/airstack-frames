@@ -13,6 +13,8 @@
 	"dependencies": {
 		"@airstack/frog": "^0.0.19",
 		"dotenv": "^16.4.5",
+		"frog": "^0.17.4",
+		"hono": "^4.6.4",
 		"next": "14.2.14",
 		"react": "^18",
 		"react-dom": "^18",
