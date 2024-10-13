@@ -1,35 +1,34 @@
 /* eslint-disable react/jsx-key */
-/** @jsxImportSource frog/jsx */
-import { Button, Frog } from 'frog'
-import { handle } from 'frog/next'
-import { devtools } from 'frog/dev'
-import { serveStatic } from 'frog/serve-static'
-import { createNeynar } from 'frog/middlewares'
+/** @jsxImportSource @airstack/frog/jsx */
+import { Button, Frog, allowListFrogMiddleware as allowList } from '@airstack/frog'
+import { handle } from '@airstack/frog/next'
+import { devtools } from '@airstack/frog/dev'
+import { serveStatic } from '@airstack/frog/serve-static'
 
 // const neynarMiddleware = neynar({
 // 	apiKey: '7C80F3B5-0FE2-4DAC-B21C-BC6A8684FC3D',
 // 	features: ['interactor', 'cast'],
 // })
 
-const neynar = createNeynar({ apiKey: 'NEYNAR_FROG_FM' })
+// Instantiate new Frog instance with Airstack API key
+export const app = new Frog({
+	apiKey: process.env.NEXT_PUBLIC_AIRSTACK_API_KEY,
+	title: 'The Professional Fry Slayer Test 🍟',
+	basePath: '/api',
+})
 
-const app = new Frog({ title: 'The Professional Fry Slayer Test 🍟', basePath: '/api', browserLocation: '/:path' }).use(
-	neynar.middleware({ features: ['interactor', 'cast'] })
-)
+const allowListMiddleware = allowList({
+	allowListCriteria: {
+		numberOfFollowersOnFarcaster: 100,
+		isFollowingOnFarcaster: [2602],
+	},
+})
 
-app.frame('/frames/fry-slayer', (c) => {
+app.frame('/', (c) => {
 	const { buttonValue, status } = c
-	console.log(c.var)
-	const { displayName, followerCount } = c.var.interactor || {}
-	console.log('cast: ', c.var.cast)
-	console.log('interactor: ', c.var.interactor)
 	return c.res({
-		image: (
-			<div style={{ color: 'white', display: 'flex', fontSize: 60 }}>
-				{status === 'initial' ? `Welcome ${displayName} to the Professional Fry Slayer Test 🍟` : `Selected: ${buttonValue}`}
-			</div>
-		),
-		intents: [<Button value="follow">Follow</Button>, <Button value="recast">Recast</Button>, <Button value="like">Like</Button>],
+		image: <div style={{ color: 'white', display: 'flex', fontSize: 60 }}>{status === 'initial' ? 'Select your fruit!' : `Selected: ${buttonValue}`}</div>,
+		intents: [<Button value="apple">Apple</Button>, <Button value="banana">Banana</Button>, <Button value="mango">Mango</Button>],
 	})
 })
 
