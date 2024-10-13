@@ -15,6 +15,7 @@ const app = new Frog({ title: 'The Professional Fry Slayer Test 🍟', basePath:
 
 app.frame('/', neynarMiddleware, (c) => {
 	const { buttonValue, status } = c
+	console.log(c)
 	return c.res({
 		image: (
 			<div style={{ color: 'white', display: 'flex', fontSize: 60 }}>
