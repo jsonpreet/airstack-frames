@@ -16,10 +16,13 @@ const app = new Frog({ title: 'The Professional Fry Slayer Test 🍟', basePath:
 app.frame('/frames/fry-slayer', neynarMiddleware, (c) => {
 	const { buttonValue, status } = c
 	console.log(c.var)
+	const { displayName, followerCount } = c.var.interactor || {}
+	console.log('cast: ', c.var.cast)
+	console.log('interactor: ', c.var.interactor)
 	return c.res({
 		image: (
 			<div style={{ color: 'white', display: 'flex', fontSize: 60 }}>
-				{status === 'initial' ? `Welcome ${c.var.interactor?.displayName} to the Professional Fry Slayer Test 🍟` : `Selected: ${buttonValue}`}
+				{status === 'initial' ? `Welcome ${displayName} to the Professional Fry Slayer Test 🍟` : `Selected: ${buttonValue}`}
 			</div>
 		),
 		intents: [<Button value="follow">Follow</Button>, <Button value="recast">Recast</Button>, <Button value="like">Like</Button>],
