@@ -4,16 +4,15 @@ import { frames } from '../frames'
 import { Button } from 'frames.js/next'
 import quizData from '../../../data/quiz.json'
 
-// State management
-let currentQuestionIndex = 0
-let score = 0
-
 export const frameHandler = frames(async (ctx) => {
 	const { pressedButton, searchParams } = ctx
-
 	const baseUrl = ctx.url.origin
 
-	// Check if we need to reset the quiz
+	// Use searchParams to manage state
+	let currentQuestionIndex = parseInt(searchParams.questionIndex || '0')
+	let score = parseInt(searchParams.score || '0')
+
+	// Reset the quiz if needed
 	if (searchParams.reset === 'true') {
 		currentQuestionIndex = 0
 		score = 0
@@ -120,7 +119,18 @@ export const frameHandler = frames(async (ctx) => {
 			</div>
 		),
 		buttons: currentQuestion.answers.map((answer, index) => (
-			<Button key={answer} action="post" value={answer} target={{ pathname: '/quiz' }}>
+			<Button
+				key={answer}
+				action="post"
+				value={answer}
+				target={{
+					pathname: '/quiz',
+					query: {
+						questionIndex: currentQuestionIndex.toString(),
+						score: score.toString(),
+					},
+				}}
+			>
 				{answer}
 			</Button>
 		)),
@@ -129,9 +139,3 @@ export const frameHandler = frames(async (ctx) => {
 
 export const GET = frameHandler
 export const POST = frameHandler
-
-// Reset quiz state when restarting
-export const resetQuiz = () => {
-	currentQuestionIndex = 0
-	score = 0
-}
