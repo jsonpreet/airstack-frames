@@ -5,27 +5,26 @@
 	"scripts": {
 		"dev": "next dev",
 		"build": "next build",
-		"deploy": "vercel",
+		"deploy": "vercel --prod",
+		"deploy:preview": "vercel",
 		"start": "next start",
-		"lint": "next lint",
-		"devtools": "npx frog"
+		"lint": "next lint"
 	},
 	"dependencies": {
-		"@airstack/frog": "^0.0.19",
+		"@airstack/frames": "^1.2.0",
+		"@apollo/client": "^3.11.8",
 		"dotenv": "^16.4.5",
-		"frog": "^0.17.4",
-		"hono": "^4.6.4",
+		"frames.js": "^0.19.3",
+		"graphql": "^16.9.0",
+		"graphql-request": "^7.1.0",
 		"next": "14.2.14",
 		"react": "^18",
 		"react-dom": "^18",
+		"sharp": "^0.33.5",
 		"vercel": "^37.8.0"
 	},
 	"devDependencies": {
-		"@types/node": "^20",
-		"@types/react": "^18",
-		"@types/react-dom": "^18",
 		"eslint": "^8",
-		"eslint-config-next": "14.2.14",
-		"typescript": "^5"
+		"eslint-config-next": "14.2.14"
 	}
 }

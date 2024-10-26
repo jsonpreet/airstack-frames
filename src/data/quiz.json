@@ -1,0 +1,33 @@
+{
+	"questions": [
+		{
+			"question": "Your date says fries are just 'okay.' You:",
+			"answers": ["Politely disagree", "Roll your eyes", "Ghost them immediately"],
+			"correctAnswer": 2
+		},
+		{
+			"question": "Your date texts you ‘hey cutie u up?’ at 2 am. You:",
+			"answers": ["Politely respond, 'Sorry, I’m already asleep.'", "Ignore and continue browsing @jessyfries on $socialMedia", "Text back, 'Umm… Fries?'"],
+			"correctAnswer": 1
+		},
+		{
+			"question": "You’re on a date, and he says, 'I don’t really get the hype around JessyFries.' You:",
+			"answers": ["Give him a chance to explain himself", "Pretend like you didn’t hear it right", "Straight-up stand up and leave"],
+			"correctAnswer": 2
+		},
+		{
+			"question": "What is the JessyFries motto for slaying fboys like the boss babe you are?",
+			"answers": ["Fries before guys, always and forever 🍟", "No Fries No Talks ❌🍟❌", "Fries and milkshake bb"],
+			"correctAnswer": 0
+		},
+		{
+			"question": "You ordered a large fries, and he tries to grab one without asking 🙅‍♂️. You:",
+			"answers": [
+				"Politely tell him to ask next time!",
+				"Stare at him and say: 'Fries are my besties. If you want one, you have to ask nice and earn it 💁🏼‍♀️.'",
+				"Catch that hand mid-air and say: 'Touch my fries again, and you’re out.'"
+			],
+			"correctAnswer": 2
+		}
+	]
+}
