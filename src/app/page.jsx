@@ -1,12 +1,25 @@
 import { fetchMetadata } from 'frames.js/next'
 
 export async function generateMetadata() {
-	const frameMetadata = await fetchMetadata(new URL('/frames', process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'))
-	return {
-		title: 'Jessy Frame',
-		other: {
-			...frameMetadata,
-		},
+	try {
+		const baseUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'http://localhost:3000'
+		console.log('Fetching metadata from:', new URL('/frames', baseUrl).toString())
+		const frameMetadata = await fetchMetadata(new URL('/frames', baseUrl))
+		console.log('Fetched metadata:', frameMetadata)
+		return {
+			title: 'Jessy Frame',
+			other: {
+				...frameMetadata,
+			},
+		}
+	} catch (error) {
+		console.error('Error fetching metadata:', error)
+		return {
+			title: 'Jessy Frame',
+			other: {
+				// Fallback metadata
+			},
+		}
 	}
 }
 

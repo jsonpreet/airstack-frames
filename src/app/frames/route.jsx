@@ -134,6 +134,7 @@ export const frameHandler = frames(
 			}
 
 			return {
+				version: 'vNext',
 				image: (
 					<div
 						style={{
